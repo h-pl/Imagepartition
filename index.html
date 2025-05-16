@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Region Configuration Tool</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <div class="left-panel">
+            <canvas id="imageCanvas"></canvas>
+            <input type="file" id="imageUpload" accept="image/*" style="display:none;">
+        </div>
+
+        <div class="right-panel">
+            <div class="panel-section global-controls-section">
+                <div class="section-header">
+                    <h2>Processor</h2>
+                    <button id="resetGlobalControlsBtn" class="header-action-button small-button">Reset</button>
+                </div>
+                <!-- {/* Global controls remain here */} -->
+                <div class="control-group">
+                    <label for="brightnessSlider">Brightness:</label>
+                    <input type="range" id="brightnessSlider" min="0" max="200" value="100"> <span id="brightnessValue">100%</span>
+                </div>
+                <div class="control-group">
+                    <label for="contrastSlider">Contrast:</label>
+                    <input type="range" id="contrastSlider" min="0" max="200" value="100"> <span id="contrastValue">100%</span>
+                </div>
+                <div class="control-group">
+                    <label for="saturationSlider">Saturation:</label>
+                    <input type="range" id="saturationSlider" min="0" max="200" value="100"> <span id="saturationValue">100%</span>
+                </div>
+                <div class="control-group checkbox-row">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="grayscaleCheckbox">
+                        <label for="grayscaleCheckbox">Grayscale</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="denoiseCheckbox">
+                        <label for="denoiseCheckbox">Denoise (Config)</label>
+                    </div>
+                     <div class="checkbox-group">
+                        <input type="checkbox" id="sharpenCheckbox">
+                        <label for="sharpenCheckbox">Sharpen (Config)</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-section regions-management-section">
+                <div class="section-header">
+                    <h2>Regions</h2>
+                    <button id="clearAllRegionsBtn" class="header-action-button small-button">Clear All</button>
+                </div>
+                <div id="regionsListContainer">
+                    <div id="regionsList">
+                        <!-- {/* Region items will be dynamically inserted here */} -->
+                    </div>
+                </div>
+            </div>
+            <div class="panel-section action-buttons-section">
+                <button id="generateConfigBtn">Generate Config</button>
+                <!-- {/* Clear All Regions button removed from here */} -->
+            </div>
+        </div>
+    </div>
+    <script src="client.js"></script>
+</body>
+</html>

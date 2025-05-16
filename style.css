@@ -1,0 +1,296 @@
+/* public/style.css */
+body, html {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f2f5;
+    color: #333;
+    height: 100%;
+    overflow: hidden;
+}
+
+.app-container {
+    display: flex;
+    height: 100vh;
+    padding: 12px;
+    box-sizing: border-box;
+    gap: 12px;
+}
+
+.left-panel, .right-panel {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 2px 8px rgba(0,0,0,0.07);
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 12px;
+}
+
+.left-panel {
+    flex: 3;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.right-panel {
+    flex: 1.8;
+    min-width: 380px;
+    max-width: 450px;
+}
+
+.panel-section {
+    margin-bottom: 12px;
+    /* Removed padding-bottom and border-bottom from here, will be on content or header */
+}
+.panel-section:last-child {
+    margin-bottom: 0;
+}
+
+/* NEW: Styling for section headers to align H2 and button */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px; /* Space after the header line */
+    padding-bottom: 8px; /* Space before border */
+    border-bottom: 1px solid #e9edf0; /* Separator line below header */
+}
+
+.section-header h2 {
+    color: #1a2733;
+    margin: 0; /* Remove default H2 margins */
+    font-size: 1.15em;
+    font-weight: 600;
+    /* Removed padding-bottom and border-bottom from H2 itself */
+}
+
+.header-action-button { /* Specific for buttons in the header */
+    padding: 5px 10px; /* Adjust padding for smaller header buttons */
+    font-size: 0.8em;
+    margin-left: 10px; /* Space from the title if title is long */
+    /* Inherits .small-button styles too if both classes are applied */
+}
+
+
+/* Canvas */
+#imageCanvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border: 2px dashed #d0d8e0;
+    border-radius: 6px;
+    background-color: #f8f9fa;
+    cursor: pointer;
+    transition: border-color 0.2s, background-color 0.2s;
+}
+#imageCanvas.dragover-active {
+    border-color: #3498db;
+    background-color: #eaf5fb;
+}
+
+/* Global Controls (Content part, after header) */
+.global-controls-section .control-group { /* Styles for the content part of global controls */
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+.global-controls-section .control-group label {
+    min-width: 75px;
+    font-size: 0.85em;
+    color: #495057;
+}
+.global-controls-section .control-group input[type="range"] {
+    flex-grow: 1;
+    margin: 0 8px;
+}
+.global-controls-section .control-group span {
+    min-width: 35px;
+    font-size: 0.85em;
+    color: #495057;
+}
+.global-controls-section .checkbox-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    padding: 0 5px;
+}
+.global-controls-section .checkbox-group input[type="checkbox"] {
+    margin-right: 4px;
+}
+.global-controls-section .checkbox-group label {
+    font-size: 0.85em;
+    min-width: auto;
+}
+.small-button { /* General small button style, used by header buttons */
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    /* Removed margin-top as it's now flex-aligned */
+}
+.small-button:hover {
+    background-color: #5a6268;
+}
+/* Specific colors for reset/clear buttons if needed, or they use default .small-button */
+#resetGlobalControlsBtn.header-action-button {
+    background-color: #6c757d; /* Gray */
+}
+#resetGlobalControlsBtn.header-action-button:hover {
+    background-color: #5a6268;
+}
+#clearAllRegionsBtn.header-action-button {
+    background-color: #ffc107; /* Yellow */
+    color: #212529;
+}
+#clearAllRegionsBtn.header-action-button:hover {
+    background-color: #e0a800;
+}
+
+
+/* Regions List (Right Panel) */
+.regions-management-section {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    /* border-bottom removed as it's on the .section-header now */
+}
+#regionsListContainer {
+    overflow-y: auto;
+    flex-grow: 1;
+    padding-right: 5px;
+}
+.no-regions-message {
+    color: #6c757d;
+    text-align: center;
+    margin-top: 15px;
+    font-style: italic;
+    font-size: 0.9em;
+}
+
+.region-item {
+    background-color: #fdfdfd;
+    border: 1px solid #e9edf0;
+    padding: 8px 10px;
+    margin-bottom: 6px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: box-shadow 0.2s, border-color 0.2s;
+}
+.region-item:hover {
+    border-color: #a5b8c9;
+}
+.region-item.selected {
+    border-color: #3498db;
+    box-shadow: 0 0 6px rgba(52, 152, 219, 0.25);
+}
+.region-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 500;
+    font-size: 0.9em;
+    color: #343a40;
+}
+.region-header .arrow {
+    font-size: 0.8em;
+    transition: transform 0.2s;
+    padding: 2px 4px;
+}
+.region-item.expanded .region-header .arrow {
+    transform: rotate(90deg);
+}
+
+.region-details {
+    display: none;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px dashed #e9edf0;
+}
+.region-item.expanded .region-details {
+    display: block;
+}
+.region-details .param-group {
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+}
+.region-details .param-group label {
+    min-width: 50px;
+    font-size: 0.8em;
+    color: #495057;
+}
+.region-details .param-group input[type="text"],
+.region-details .param-group input[type="number"] {
+    padding: 5px 7px;
+    border: 1px solid #ced4da;
+    border-radius: 3px;
+    font-size: 0.85em;
+    margin-left: 5px;
+    width: 60px;
+}
+.region-details .param-group input[type="range"] {
+    flex-grow: 1;
+    margin: 0 5px 0 8px;
+}
+.region-details .param-group .value-display {
+    min-width: 35px;
+    font-size: 0.8em;
+    text-align: right;
+    color: #495057;
+}
+.delete-region-btn { /* This is inside region-details, not a header-action-button */
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 7px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85em;
+    margin-top: 8px;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+}
+.delete-region-btn:hover {
+    background-color: #c82333;
+}
+
+/* Action Buttons Section (Now only Generate Config button by default) */
+.action-buttons-section {
+    padding-top: 12px;
+    border-top: 1px solid #e9edf0; /* Add separator if it's the last content section */
+    display: flex;
+    gap: 10px;
+}
+#generateConfigBtn { /* Removed #clearAllRegionsBtn styles from here as it moved */
+    flex-grow: 1;
+    padding: 10px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.95em;
+    font-weight: 500;
+    transition: background-color 0.2s, box-shadow 0.2s;
+    background-color: #28a745;
+    color: white;
+}
+#generateConfigBtn:hover {
+    background-color: #218838;
+}
+
+
+/* Custom Scrollbar */
+#regionsListContainer::-webkit-scrollbar { width: 7px; }
+#regionsListContainer::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
+#regionsListContainer::-webkit-scrollbar-thumb { background: #ced4da; border-radius: 10px; }
+#regionsListContainer::-webkit-scrollbar-thumb:hover { background: #adb5bd; }
